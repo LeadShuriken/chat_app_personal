@@ -27,4 +27,8 @@ public class ApplicationDataService {
         }
         userDataService.setUser(name);
     }
+
+    public boolean userExists(String name) {
+        return userDataService.isUserNameTaken(name);
+    }
 }

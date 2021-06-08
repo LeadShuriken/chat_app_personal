@@ -13,14 +13,6 @@ public class Message {
     @JsonProperty("message")
     private final String message;
 
-    public String getMessage() {
-        return message;
-    }
-
-    public String getFromLogin() {
-        return fromLogin;
-    }
-
     @SQLInjectionSafe
     @JsonProperty("fromLogin")
     private final String fromLogin;
@@ -33,6 +25,14 @@ public class Message {
     public Message() {
         this.fromLogin = null;
         this.message = null;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public String getFromLogin() {
+        return fromLogin;
     }
 
     @Override

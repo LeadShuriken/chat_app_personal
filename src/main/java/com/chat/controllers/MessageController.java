@@ -30,11 +30,9 @@ public class MessageController {
     @MessageMapping(value = "${api.entry}/{to}")
     public void sendMessage(@DestinationVariable @SQLInjectionSafe String to, @Valid Message message) {
         System.out.println("Handling send message: " + message + " to " + to);
-        boolean exists = applicationDataService.getAllUsers().contains(to);
 
-        if (exists) {
+        if (applicationDataService.getAllUsers().contains(to)) {
             simpMessagingTemplate.convertAndSend(destination + to, message);
         }
     }
-
 }
