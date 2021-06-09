@@ -1,4 +1,4 @@
-package com.chat.services;
+package com.chat.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,12 +8,12 @@ import java.util.List;
 import com.chat.exceptions.UserException;
 
 @Service
-public class ApplicationDataService {
+public class UserDataService {
 
-    private final UserDataService userDataService;
+    private final UserDataRepository userDataService;
 
     @Autowired
-    public ApplicationDataService(UserDataService userDataService) {
+    public UserDataService(UserDataRepository userDataService) {
         this.userDataService = userDataService;
     }
 

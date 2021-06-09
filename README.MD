@@ -14,6 +14,7 @@ CLICKBAIT-FILTER-SERVICE uses a number of open source projects:
   * [SPRING-BOOT] - SPRING PROJ BOOTSTRAP
   * [H2] - SQL IN MEMORY DATABASE
   * [JWT] - JSON WEB TOKEN
+  * [LOMBOK] - JAVA SPLICING FRAMEWORK
 
 ## Installation
 
@@ -50,3 +51,4 @@ This application is an **GRADLE APPLICATION USING THE GRADLE WRAPPER**;
   [H2]: <http://www.h2database.com/html/main.html>
   [GRADLE]: <https://gradle.org>
   [JWT]: <https://jwt.io>
+  [LOMBOK]: <https://projectlombok.org>

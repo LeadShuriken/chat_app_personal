@@ -1,12 +1,6 @@
 package com.chat.dao;
 
-import java.time.LocalDate;
 import java.util.UUID;
-
-import javax.validation.constraints.Past;
-
-import com.chat.model.MessageStatus;
-import com.chat.annotations.SQLInjectionSafe;
 import com.chat.annotations.UUIDA;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -21,11 +15,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Message {
+public class ChatRoom {
 
     @UUIDA
-    @JsonProperty("userId")
-    private UUID userId;
+    @JsonProperty("id")
+    private UUID id;
 
     @UUIDA
     @JsonProperty("chatId")
@@ -38,23 +32,4 @@ public class Message {
     @UUIDA
     @JsonProperty("recipientId")
     private UUID recipientId;
-
-    @SQLInjectionSafe
-    @JsonProperty("senderName")
-    private String senderName;
-
-    @SQLInjectionSafe
-    @JsonProperty("recipientName")
-    private String recipientName;
-
-    @SQLInjectionSafe
-    @JsonProperty("content")
-    private String content;
-
-    @Past
-    @JsonProperty("timestamp")
-    private LocalDate timestamp;
-
-    @JsonProperty("status")
-    private MessageStatus status;
 }

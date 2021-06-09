@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.chat.annotations.SQLInjectionSafe;
 import com.chat.exceptions.UserException;
-import com.chat.services.ApplicationDataService;
+import com.chat.repository.UserDataService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsersController {
 
     @Autowired
-    private ApplicationDataService applicationDataService;
+    private UserDataService userDataService;
 
     @GetMapping(value = "${api.registration}/{userName}")
     public ResponseEntity<Void> register(@PathVariable @SQLInjectionSafe String userName) {
         System.out.println("Register request: " + userName);
-        if (!applicationDataService.userExists(userName)) {
+        if (!userDataService.userExists(userName)) {
             try {
-                applicationDataService.addNewUser(userName);
+                userDataService.addNewUser(userName);
             } catch (UserException e) {
                 return ResponseEntity.badRequest().build();
             }
@@ -37,6 +37,6 @@ public class UsersController {
 
     @GetMapping(value = "${api.getAll}")
     public List<String> getAll() {
-        return applicationDataService.getAllUsers();
+        return userDataService.getAllUsers();
     }
 }

@@ -2,13 +2,17 @@ package com.chat.controllers;
 
 import com.chat.annotations.SQLInjectionSafe;
 import com.chat.dao.Message;
-import com.chat.services.ApplicationDataService;
+import com.chat.repository.ChatMessageService;
+import com.chat.repository.ChatRoomService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,20 +23,37 @@ import javax.validation.Valid;
 public class MessageController {
 
     @Autowired
-    private ApplicationDataService applicationDataService;
-
-    @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
     @Value("${api.destination}")
     private String destination;
 
-    @MessageMapping(value = "${api.entry}/{to}")
-    public void sendMessage(@DestinationVariable @SQLInjectionSafe String to, @Valid Message message) {
-        System.out.println("Handling send message: " + message + " to " + to);
+    @Autowired private SimpMessagingTemplate messagingTemplate;
+    @Autowired private ChatMessageService chatMessageService;
+    @Autowired private ChatRoomService chatRoomService;
 
-        if (applicationDataService.getAllUsers().contains(to)) {
-            simpMessagingTemplate.convertAndSend(destination + to, message);
-        }
+    @MessageMapping("/chat")
+    public void processMessage(@Payload Message chatMessage) {}
+
+    @GetMapping("/messages/{senderId}/{recipientId}/count")
+    public ResponseEntity<Long> countNewMessages(
+            @PathVariable String senderId,
+            @PathVariable String recipientId) {
+
+        return ResponseEntity
+                .ok(chatMessageService.newMessages(senderId, recipientId));
+    }
+
+    @GetMapping("/messages/{senderId}/{recipientId}")
+    public ResponseEntity<?> findChatMessages ( @PathVariable String senderId,
+                                                @PathVariable String recipientId) {
+        return ResponseEntity
+                .ok(chatMessageService.getChatMessages(senderId, recipientId));
+    }
+
+    @GetMapping("/messages/{id}")
+    public ResponseEntity<?> findMessage ( @PathVariable String id) {
+        return ResponseEntity
+                .ok(chatMessageService.findMessageById(id));
     }
 }
