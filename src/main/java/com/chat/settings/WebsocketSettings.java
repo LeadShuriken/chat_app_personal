@@ -18,25 +18,16 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @Configuration
 @EnableWebSocketMessageBroker
 @ConfigurationProperties(prefix = "api")
-public class WebsocketSettings implements WebSocketMessageBrokerConfigurer {
-
-    private String version;
-    private String topic;
+public class WebSocketSettings implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        registry
-            .setApplicationDestinationPrefixes(version)
-            .setUserDestinationPrefix(topic)
-            .enableSimpleBroker(topic);
+        registry.setApplicationDestinationPrefixes("/v1").setUserDestinationPrefix("/chat").enableSimpleBroker("/chat");
     }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry
-            .addEndpoint("/ws")
-            .setAllowedOrigins("*")
-            .withSockJS();
+        registry.addEndpoint("/ws").withSockJS();
     }
 
     @Override
@@ -48,13 +39,5 @@ public class WebsocketSettings implements WebSocketMessageBrokerConfigurer {
         converter.setContentTypeResolver(resolver);
         messageConverters.add(converter);
         return false;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
-    }
-
-    public void setTopic(String topic) {
-        this.topic = topic;
     }
 }

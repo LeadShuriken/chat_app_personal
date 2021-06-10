@@ -1,5 +1,5 @@
 package com.chat.model;
 
 public enum MessageStatus {
-    RECEIVED, DELIVERED
+    CHAT, LEAVE, JOIN
 }

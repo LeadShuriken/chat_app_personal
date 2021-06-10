@@ -3,7 +3,6 @@ package com.chat.repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class ChatRoomService {
 

@@ -17,7 +17,7 @@ public class UserDataRepository {
                 this.jdbcTemplate = jdbcTemplate;
         }
 
-        List<String> getUsers() {  
+        List<String> getUsers() {
                 return jdbcTemplate.query("SELECT * FROM chat.users", mapUsersFromDb());
         }
 
