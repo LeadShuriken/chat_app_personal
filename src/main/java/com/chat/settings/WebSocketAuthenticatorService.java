@@ -13,6 +13,7 @@ public class WebSocketAuthenticatorService {
 
     public UsernamePasswordAuthenticationToken getAuthenticatedOrFail(final String username, final String password)
             throws AuthenticationException {
+
         if (username == null || username.trim().isEmpty()) {
             throw new AuthenticationCredentialsNotFoundException("Username was null or empty.");
         }
@@ -21,11 +22,10 @@ public class WebSocketAuthenticatorService {
         }
 
         // if (fetchUserFromDb(username, password) == null) {
-        //     throw new BadCredentialsException("Bad credentials for user " + username);
+        // throw new BadCredentialsException("Bad credentials for user " + username);
         // }
 
         return new UsernamePasswordAuthenticationToken(username, null,
-                Collections.singleton((GrantedAuthority) () -> "USER")
-        );
+                Collections.singleton((GrantedAuthority) () -> "ADMIN"));
     }
 }

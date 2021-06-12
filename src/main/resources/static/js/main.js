@@ -1,8 +1,8 @@
 'use strict';
 
-var usernamePage = document.querySelector('#username-page');
+var chatnamePage = document.querySelector('#chatname-page');
 var chatPage = document.querySelector('#chat-page');
-var usernameForm = document.querySelector('#usernameForm');
+var chatnameForm = document.querySelector('#chatnameForm');
 var messageForm = document.querySelector('#messageForm');
 var messageInput = document.querySelector('#message');
 var messageArea = document.querySelector('#messageArea');
@@ -20,7 +20,7 @@ function connect(event) {
     username = document.querySelector('#name').value.trim();
 
     if (username) {
-        usernamePage.classList.add('hidden');
+        chatnamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
 
         var socket = new SockJS('/wss');
@@ -115,5 +115,5 @@ function getAvatarColor(messageSender) {
     return colors[index];
 }
 
-usernameForm.addEventListener('submit', connect, true)
 messageForm.addEventListener('submit', send, true)
+chatnameForm.addEventListener('submit', connect, true)
