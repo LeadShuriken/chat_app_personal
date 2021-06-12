@@ -26,7 +26,7 @@ function connect(event) {
         var socket = new SockJS('/wss');
         stompClient = Stomp.over(socket);
 
-        stompClient.connect({}, onConnected, onError);
+        stompClient.connect({ login: 'a', password: 'a' }, onConnected, onError);
     }
     event.preventDefault();
 }
@@ -38,8 +38,7 @@ function onConnected() {
 
     // Tell your username to the server
     stompClient.send("/app/register",
-        {},
-        JSON.stringify({ sender: username, type: 'JOIN' })
+        {}, JSON.stringify({ sender: username, type: 'JOIN' })
     )
 
     connectingElement.classList.add('hidden');

@@ -5,11 +5,11 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>Chat Box</title>
-    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
 </head>
 
-<body background="background.jpg"
-    style="background-position: center; background-repeat: no-repeat; background-size: cover;">
+<body
+    style="background-position: center; background-repeat: no-repeat; background-size: cover; background-color: black;">
     <noscript>
         <h2>No JS no Chat!</h2>
     </noscript>
@@ -49,9 +49,9 @@
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-    <script src="/js/main.js"></script>
+    <script th:src="@{/webjars/sockjs-client/1.5.1/sockjs.min.js}"></script>
+    <script th:src="@{/webjars/stomp-websocket/2.3.4/stomp.min.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
 </body>
 
 </html>
