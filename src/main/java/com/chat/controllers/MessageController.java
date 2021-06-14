@@ -18,15 +18,14 @@ public class MessageController {
 
     @MessageMapping("/register/{chatName}")
     @SendTo("/chat/{chatName}")
-    public Message register(@Valid @Payload Message chatMessage, SimpMessageHeaderAccessor headerAccessor,
-            @DestinationVariable String chatName) {
+    public Message register(@Valid @Payload Message chatMessage, SimpMessageHeaderAccessor headerAccessor) {
         headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
         return chatMessage;
     }
 
     @MessageMapping("/send/{chatName}")
     @SendTo("/chat/{chatName}")
-    public Message sendMessage(@Valid @Payload Message chatMessage, @DestinationVariable String chatName) {
+    public Message sendMessage(@Valid @Payload Message chatMessage) {
         return chatMessage;
     }
 }
