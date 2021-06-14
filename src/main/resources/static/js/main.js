@@ -9,7 +9,7 @@ var messageArea = document.querySelector('#messageArea');
 var connectingElement = document.querySelector('.connecting');
 
 var stompClient = null;
-var username = null;
+var chatname = null;
 
 var colors = [
     '#2196F3', '#32c787', '#00BCD4', '#ff5652',
@@ -17,9 +17,9 @@ var colors = [
 ];
 
 function connect(event) {
-    username = document.querySelector('#name').value.trim();
+    chatname = document.querySelector('#chatName').value.trim();
 
-    if (username) {
+    if (chatname) {
         chatnamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
 
@@ -34,11 +34,11 @@ function connect(event) {
 
 function onConnected() {
     // Subscribe to the Public Topic
-    stompClient.subscribe('/chat', onMessageReceived);
+    stompClient.subscribe('/chat/' + chatname, onMessageReceived);
 
-    // Tell your username to the server
-    stompClient.send("/app/register",
-        {}, JSON.stringify({ sender: username, type: 'JOIN' })
+    // Tell your chatname to the server
+    stompClient.send("/app/register/" + chatname,
+        {}, JSON.stringify({ sender: chatname, type: 'JOIN' })
     )
 
     connectingElement.classList.add('hidden');
@@ -56,12 +56,12 @@ function send(event) {
 
     if (messageContent && stompClient) {
         var chatMessage = {
-            sender: username,
+            sender: chatname,
             content: messageInput.value,
             type: 'CHAT'
         };
 
-        stompClient.send("/app/send", {}, JSON.stringify(chatMessage));
+        stompClient.send("/app/send/" + chatname, {}, JSON.stringify(chatMessage));
         messageInput.value = '';
     }
     event.preventDefault();
@@ -88,10 +88,10 @@ function onMessageReceived(payload) {
 
         messageElement.appendChild(avatarElement);
 
-        var usernameElement = document.createElement('span');
-        var usernameText = document.createTextNode(message.sender);
-        usernameElement.appendChild(usernameText);
-        messageElement.appendChild(usernameElement);
+        var chatnameElement = document.createElement('span');
+        var chatnameText = document.createTextNode(message.sender);
+        chatnameElement.appendChild(chatnameText);
+        messageElement.appendChild(chatnameElement);
     }
 
     var textElement = document.createElement('p');
