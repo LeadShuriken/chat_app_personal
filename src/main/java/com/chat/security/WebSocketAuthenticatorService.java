@@ -1,4 +1,4 @@
-package com.chat.settings;
+package com.chat.security;
 
 import java.util.Collections;
 

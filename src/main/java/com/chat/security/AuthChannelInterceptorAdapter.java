@@ -1,8 +1,7 @@
-package com.chat.settings;
+package com.chat.security;
 
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.messaging.simp.stomp.StompCommand;
