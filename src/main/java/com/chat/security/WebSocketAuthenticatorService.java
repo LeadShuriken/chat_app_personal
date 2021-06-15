@@ -17,6 +17,7 @@ public class WebSocketAuthenticatorService {
         if (username == null || username.trim().isEmpty()) {
             throw new AuthenticationCredentialsNotFoundException("Username was null or empty.");
         }
+
         if (password == null || password.trim().isEmpty()) {
             throw new AuthenticationCredentialsNotFoundException("Password was null or empty.");
         }

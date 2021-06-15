@@ -3,6 +3,7 @@
 var chatnamePage = document.querySelector('#chatname-page');
 var chatPage = document.querySelector('#chat-page');
 var chatnameForm = document.querySelector('#chatnameForm');
+var usernameForm = document.querySelector('#usernameForm');
 var messageForm = document.querySelector('#messageForm');
 var messageInput = document.querySelector('#message');
 var messageArea = document.querySelector('#messageArea');
@@ -10,6 +11,7 @@ var connectingElement = document.querySelector('.connecting');
 
 var stompClient = null;
 var chatname = null;
+var username = null;
 
 var colors = [
     '#2196F3', '#32c787', '#00BCD4', '#ff5652',
@@ -17,9 +19,10 @@ var colors = [
 ];
 
 function connect(event) {
+    username = document.querySelector('#userName').value.trim();
     chatname = document.querySelector('#chatName').value.trim();
 
-    if (chatname) {
+    if (chatname && username) {
         chatnamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
 
@@ -31,32 +34,29 @@ function connect(event) {
     event.preventDefault();
 }
 
-
 function onConnected() {
     // Subscribe to the Public Topic
     stompClient.subscribe('/chat/' + chatname, onMessageReceived);
 
     // Tell your chatname to the server
     stompClient.send("/app/register/" + chatname,
-        {}, JSON.stringify({ sender: chatname, type: 'JOIN' })
+        {}, JSON.stringify({ sender: username, type: 'JOIN' })
     )
 
     connectingElement.classList.add('hidden');
 }
-
 
 function onError(error) {
     connectingElement.textContent = 'No open websockets here.';
     connectingElement.style.color = 'red';
 }
 
-
 function send(event) {
     var messageContent = messageInput.value.trim();
 
     if (messageContent && stompClient) {
         var chatMessage = {
-            sender: chatname,
+            sender: username,
             content: messageInput.value,
             type: 'CHAT'
         };

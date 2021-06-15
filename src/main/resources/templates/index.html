@@ -10,11 +10,12 @@
 
 <body
     style="background-position: center; background-repeat: no-repeat; background-size: cover; background-color: black;">
+
     <noscript>
         <h2>No JS no Chat!</h2>
     </noscript>
 
-    <div sec:authorize="hasRole('ROLE_ADMIN')" id="chatname-page">
+    <div id="chatname-page">
         <div class="chatname-page-container">
             <h1 class="title">Enter Chat Token</h1>
             <form id="chatnameForm" name="chatnameForm">
@@ -22,13 +23,24 @@
                     <input type="text" id="chatName" placeholder="Token" autocomplete="off" class="form-control" />
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="accent chatname-submit">Begin Conversation</button>
+                    <input type="text" id="userName" placeholder="User Name" autocomplete="off" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="accent chatname-submit">Register</button>
                 </div>
             </form>
         </div>
     </div>
 
     <div id="chat-page" class="hidden">
+        <div class="navbar">
+            <div>
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit" class="default" value="Logout">Logout</button>
+                </form>
+            </div>
+        </div>
+
         <div class="chat-container">
             <div class="chat-header">
                 <h2>Chat Box</h2>
@@ -47,12 +59,9 @@
                 </div>
             </form>
         </div>
-        <div sec:authorize="hasRole('ROLE_ADMIN')">
-            <form th:action="@{/logout}" method="post">
-                <input type="submit" value="Logout" />
-            </form>
-        </div>
     </div>
+
+
 
     <script th:src="@{/webjars/sockjs-client/1.5.1/sockjs.min.js}"></script>
     <script th:src="@{/webjars/stomp-websocket/2.3.4/stomp.min.js}"></script>
