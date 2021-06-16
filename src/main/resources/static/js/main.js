@@ -31,7 +31,7 @@ function connect(event) {
         var socket = new SockJS('/wss');
         stompClient = Stomp.over(socket);
 
-        stompClient.connect({ login: 'a', password: 'a' }, onConnected, onError);
+        stompClient.connect({ chat: chatname }, onConnected, onError);
     }
     event.preventDefault();
 }
