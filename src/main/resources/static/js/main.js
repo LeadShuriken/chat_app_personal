@@ -26,12 +26,39 @@ function connect(event) {
         chatnamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
 
+        document.getElementById("copytextarea").value = window.location.origin + '/join?id=' + chatname;
+
         var socket = new SockJS('/wss');
         stompClient = Stomp.over(socket);
 
         stompClient.connect({ login: 'a', password: 'a' }, onConnected, onError);
     }
     event.preventDefault();
+}
+
+function copyToClipboard(text) {
+    if (window.clipboardData && window.clipboardData.setData) {
+        // Internet Explorer-specific code path to prevent textarea being shown while dialog is visible.
+        return window.clipboardData.setData("Text", text);
+
+    }
+    else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
+        var textarea = document.createElement("textarea");
+        textarea.textContent = text;
+        textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in Microsoft Edge.
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+            return document.execCommand("copy");  // Security exception may be thrown by some browsers.
+        }
+        catch (ex) {
+            console.warn("Copy to clipboard failed.", ex);
+            return false;
+        }
+        finally {
+            document.body.removeChild(textarea);
+        }
+    }
 }
 
 function onConnected() {
@@ -117,3 +144,7 @@ function getAvatarColor(messageSender) {
 
 messageForm.addEventListener('submit', send, true)
 chatnameForm.addEventListener('submit', connect, true)
+
+document.querySelector("#copy").onclick = function () {
+    copyToClipboard(document.getElementById("copytextarea").value);
+};

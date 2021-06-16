@@ -34,10 +34,14 @@
 
     <div id="chat-page" class="hidden">
         <div class="navbar">
-            <div>
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
                 <form th:action="@{/logout}" method="post">
                     <button type="submit" class="default" value="Logout">Logout</button>
                 </form>
+            </div>
+            <div sec:authorize="hasRole('ROLE_ADMIN')" class='end'>
+                <input type="text" disabled id="copytextarea" placeholder="Join Link area" />
+                <button id="copy" class="default">Copy Join Link</button>
             </div>
         </div>
 
