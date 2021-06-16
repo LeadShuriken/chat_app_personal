@@ -17,10 +17,10 @@ public class WebSocketChatEventListener {
     @Autowired
     private SimpMessageSendingOperations messagingTemplate;
 
-    @EventListener
-    public void handleWebSocketConnectListener(SessionConnectedEvent event) {
-        System.out.println("Add Chat token to DB");
-    }
+    // @EventListener
+    // public void handleWebSocketConnectListener(SessionConnectedEvent event) {
+    //     System.out.println("Add Chat token to DB");
+    // }
 
     @EventListener
     public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {

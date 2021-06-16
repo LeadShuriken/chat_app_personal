@@ -26,7 +26,7 @@ function connect(event) {
         chatnamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
 
-        document.getElementById("copytextarea").value = window.location.origin + '/join?id=' + chatname;
+        document.getElementById("copytextarea").value = window.location.origin + '/v1/join?id=' + chatname;
 
         var socket = new SockJS('/wss');
         stompClient = Stomp.over(socket);
