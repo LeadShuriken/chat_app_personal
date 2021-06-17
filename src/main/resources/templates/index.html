@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
@@ -20,7 +20,8 @@
             <h1 class="title">Enter Chat Token</h1>
             <form id="chatnameForm" name="chatnameForm">
                 <div class="form-group">
-                    <input type="text" id="chatName" placeholder="Token" autocomplete="off" class="form-control" th:value="${chatname}"/>
+                    <input type="text" id="chatName" placeholder="Token" autocomplete="off" class="form-control"
+                        th:disabled="${chatname != null}" th:value="${chatname}" />
                 </div>
                 <div class="form-group">
                     <input type="text" id="userName" placeholder="User Name" autocomplete="off" class="form-control" />
@@ -34,12 +35,12 @@
 
     <div id="chat-page" class="hidden">
         <div class="navbar">
-            <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <div>
                 <form th:action="@{/logout}" method="post">
                     <button type="submit" class="default" value="Logout">Logout</button>
                 </form>
             </div>
-            <div sec:authorize="hasRole('ROLE_ADMIN')" class='end'>
+            <div sec:authorize="hasAuthority('ADMIN')" class='end'>
                 <input type="text" disabled id="copytextarea" placeholder="Join Link area" />
                 <button id="copy" class="default">Copy Join Link</button>
             </div>
@@ -64,8 +65,6 @@
             </form>
         </div>
     </div>
-
-
 
     <script th:src="@{/webjars/sockjs-client/1.5.1/sockjs.min.js}"></script>
     <script th:src="@{/webjars/stomp-websocket/2.3.4/stomp.min.js}"></script>

@@ -8,6 +8,8 @@ var messageForm = document.querySelector('#messageForm');
 var messageInput = document.querySelector('#message');
 var messageArea = document.querySelector('#messageArea');
 var connectingElement = document.querySelector('.connecting');
+var copyArea = document.getElementById("copytextarea");
+var copyBox = document.querySelector("#copy");
 
 var stompClient = null;
 var chatname = null;
@@ -26,7 +28,9 @@ function connect(event) {
         chatnamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
 
-        document.getElementById("copytextarea").value = window.location.origin + '/v1/join?id=' + chatname;
+        if (copyArea) {
+            copyArea.value = window.location.origin + '/v1/join?id=' + chatname;
+        }
 
         var socket = new SockJS('/wss');
         stompClient = Stomp.over(socket);
@@ -145,6 +149,8 @@ function getAvatarColor(messageSender) {
 messageForm.addEventListener('submit', send, true)
 chatnameForm.addEventListener('submit', connect, true)
 
-document.querySelector("#copy").onclick = function () {
-    copyToClipboard(document.getElementById("copytextarea").value);
-};
+if (copyBox) {
+    copyBox.onclick = function () {
+        copyToClipboard(document.getElementById("copytextarea").value);
+    };
+}

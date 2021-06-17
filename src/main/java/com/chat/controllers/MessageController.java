@@ -9,9 +9,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +32,6 @@ public class MessageController {
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken("user", null,
                 Collections.singleton((GrantedAuthority) () -> "USER"));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
         return new ModelAndView("forward:/index", model);
     }
 

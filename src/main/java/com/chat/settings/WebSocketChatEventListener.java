@@ -8,7 +8,6 @@ import org.springframework.context.event.EventListener;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Component;
-import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
 @Component
@@ -19,7 +18,7 @@ public class WebSocketChatEventListener {
 
     // @EventListener
     // public void handleWebSocketConnectListener(SessionConnectedEvent event) {
-    //     System.out.println("Add Chat token to DB");
+    // System.out.println("Add Chat token to DB");
     // }
 
     @EventListener
@@ -27,11 +26,12 @@ public class WebSocketChatEventListener {
         System.out.println("Remove Chat token from DB");
         StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
         String username = (String) headerAccessor.getSessionAttributes().get("username");
-        if (username != null) {
+        String chatname = (String) headerAccessor.getSessionAttributes().get("chatname");
+        if (username != null && chatname != null) {
             Message chatMessage = new Message();
             chatMessage.setType(MessageStatus.LEAVE);
             chatMessage.setSender(username);
-            messagingTemplate.convertAndSend("/chat/" + username, chatMessage);
+            messagingTemplate.convertAndSend("/chat/" + chatname, chatMessage);
         }
     }
 }

@@ -11,16 +11,21 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.filter.OncePerRequestFilter;
-
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 public class AuthenticationFilter extends OncePerRequestFilter {
 
+    private String excludeUrl = "/join";
+
+    public AuthenticationFilter(String version) {
+        this.excludeUrl = version + excludeUrl; 
+    }
+
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        return isAuthenticated();
+        return isAuthenticated() || excludeUrl.equals(request.getRequestURI());
     }
 
     private boolean isAuthenticated() {
