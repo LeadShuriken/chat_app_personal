@@ -22,7 +22,7 @@ var colors = [
 
 function connect(event) {
     username = document.querySelector('#userName').value.trim();
-    chatname = document.querySelector('#chatName').value.trim();
+    chatname = encodeURIComponent(document.querySelector('#chatName').value.trim())
 
     if (chatname && username) {
         chatnamePage.classList.add('hidden');
@@ -34,7 +34,7 @@ function connect(event) {
 
         var socket = new SockJS('/wss');
         stompClient = Stomp.over(socket);
-
+        stompClient.debug = null;
         stompClient.connect({ chat: chatname }, onConnected, onError);
     }
     event.preventDefault();
@@ -78,7 +78,12 @@ function onConnected() {
 }
 
 function onError(error) {
-    connectingElement.textContent = 'No open websockets here.';
+    if (error.headers && error.headers.message && error.headers.message.split('\\c')[1]) {
+        connectingElement.textContent = error.headers.message.split('\\c')[1].trim()
+    } else if (error.toString().indexOf("Whoops") === -1) {
+        connectingElement.textContent = 'Websocket Error!'
+    }
+
     connectingElement.style.color = 'red';
 }
 
@@ -109,6 +114,10 @@ function onMessageReceived(payload) {
     } else if (message.type === 'LEAVE') {
         messageElement.classList.add('event-message');
         message.content = message.sender + ' left!';
+    } else if (message.type === 'ERROR') {
+        connectingElement.textContent = 'Socket limit reached try later.';
+        connectingElement.style.color = 'red';
+        return;
     } else {
         messageElement.classList.add('chat-message');
 

@@ -25,7 +25,7 @@ public class AuthChannelInterceptorAdapter implements ChannelInterceptor {
     @Override
     public Message<?> preSend(final Message<?> message, final MessageChannel channel) throws AuthenticationException {
         final StompHeaderAccessor accessor = MessageHeaderAccessor.getAccessor(message, StompHeaderAccessor.class);
-      
+
         if (StompCommand.CONNECT == accessor.getCommand()) {
             final String chatName = accessor.getFirstNativeHeader("chat");
 

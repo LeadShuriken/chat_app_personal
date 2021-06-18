@@ -20,8 +20,8 @@
             <h1 class="title">Enter Chat Token</h1>
             <form id="chatnameForm" name="chatnameForm">
                 <div class="form-group">
-                    <input type="text" id="chatName" placeholder="Token" autocomplete="off" class="form-control"
-                        th:disabled="${chatname != null}" th:value="${chatname}" />
+                    <input type="text" max="200" id="chatName" placeholder="Token" autocomplete="off"
+                        class="form-control" th:disabled="${chatname != null}" th:value="${chatname}" />
                 </div>
                 <div class="form-group">
                     <input type="text" id="userName" placeholder="User Name" autocomplete="off" class="form-control" />

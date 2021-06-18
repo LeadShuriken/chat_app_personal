@@ -22,11 +22,11 @@ public class UserDataRepository {
         }
 
         void setUser(String userName) {
-                jdbcTemplate.update("INSERT INTO chat.users ( name ) VALUES (?)", userName);
+                jdbcTemplate.update("INSERT INTO chat.users ( user_name ) VALUES (?)", userName);
         }
 
         boolean isUserNameTaken(String userName) {
-                return jdbcTemplate.queryForObject("SELECT EXISTS ( SELECT 1 FROM chat.users WHERE userName = ? )",
+                return jdbcTemplate.queryForObject("SELECT EXISTS ( SELECT 1 FROM chat.users WHERE user_name = ? )",
                                 (resultSet, i) -> resultSet.getBoolean(1), new Object[] { userName });
         }
 

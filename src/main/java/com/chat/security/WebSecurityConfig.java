@@ -21,17 +21,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
     http
-    .addFilterBefore(
-    new AuthenticationFilter(version),
-    UsernamePasswordAuthenticationFilter.class)
-    .authorizeRequests()
-    .antMatchers("/index", version + "/join**").permitAll()
-    .anyRequest().authenticated()
-    .and()
-    .logout()
-    .deleteCookies("JSESSIONID")
-    .clearAuthentication(true)
-    .logoutSuccessUrl("/index").permitAll();
+        .addFilterBefore(
+            new AuthenticationFilter(version),
+            UsernamePasswordAuthenticationFilter.class)
+        .authorizeRequests()
+            .antMatchers("/index", version + "/join**").permitAll()
+            .anyRequest().authenticated()
+            .and()
+        .logout()
+            .deleteCookies("JSESSIONID")
+            .clearAuthentication(true)
+        .logoutSuccessUrl("/index").permitAll();
     }
 
     @Bean
