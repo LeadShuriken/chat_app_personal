@@ -71,7 +71,7 @@ function onConnected() {
 
     // Tell your chatname to the server
     stompClient.send("/app/register/" + chatname,
-        {}, JSON.stringify({ sender: username, type: 'JOIN' })
+        {}, JSON.stringify({ sender: username, type: 'MS_JOIN' })
     )
 
     connectingElement.classList.add('hidden');
@@ -87,14 +87,14 @@ function onError(error) {
     connectingElement.style.color = 'red';
 }
 
-function send(event) {
+function sendWS(event) {
     var messageContent = messageInput.value.trim();
 
     if (messageContent && stompClient) {
         var chatMessage = {
             sender: username,
             content: messageInput.value,
-            type: 'CHAT'
+            type: 'MS_CHAT'
         };
 
         stompClient.send("/app/send/" + chatname, {}, JSON.stringify(chatMessage));
@@ -108,13 +108,13 @@ function onMessageReceived(payload) {
 
     var messageElement = document.createElement('li');
 
-    if (message.type === 'JOIN') {
+    if (message.type === 'MS_JOIN') {
         messageElement.classList.add('event-message');
         message.content = message.sender + ' joined!';
-    } else if (message.type === 'LEAVE') {
+    } else if (message.type === 'MS_LEAVE') {
         messageElement.classList.add('event-message');
         message.content = message.sender + ' left!';
-    } else if (message.type === 'ERROR') {
+    } else if (message.type === 'MS_ERROR') {
         connectingElement.textContent = 'Socket limit reached try later.';
         connectingElement.style.color = 'red';
         return;
@@ -155,7 +155,7 @@ function getAvatarColor(messageSender) {
     return colors[index];
 }
 
-messageForm.addEventListener('submit', send, true)
+messageForm.addEventListener('submit', sendWS, true)
 chatnameForm.addEventListener('submit', connect, true)
 
 if (copyBox) {

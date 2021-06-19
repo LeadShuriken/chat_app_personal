@@ -47,6 +47,9 @@
         </div>
 
         <div class="chat-container">
+            <video id="video" controls width="250">
+                Sorry, your browser doesn't support embedded videos.
+            </video>
             <div class="chat-header">
                 <h2>Chat Box</h2>
             </div>
@@ -60,15 +63,18 @@
                         <input type="text" id="message" placeholder="Write Here..." autocomplete="off"
                             class="form-control" />
                         <button type="submit" class="primary">Send</button>
+                        <button type="button" class="accent" onclick='createOffer()'>Call</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 
+    <script th:src="@{/webjars/sockjs-client/simple-peer/9.7.0/simplepeer.min.js}"></script>
     <script th:src="@{/webjars/sockjs-client/1.5.1/sockjs.min.js}"></script>
     <script th:src="@{/webjars/stomp-websocket/2.3.4/stomp.min.js}"></script>
-    <script th:src="@{/js/main.js}"></script>
+    <script th:src="@{/js/webRTCClient.js}"></script>
+    <script th:src="@{/js/stompClient.js}"></script>
 </body>
 
 </html>

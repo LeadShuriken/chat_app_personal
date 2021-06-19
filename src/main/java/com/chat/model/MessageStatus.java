@@ -1,5 +1,5 @@
 package com.chat.model;
 
 public enum MessageStatus {
-    CHAT, LEAVE, JOIN, VIDEO_START, VIDEO_CLOSE, ERROR
+    MS_CHAT, MS_LEAVE, MS_JOIN, MS_ERROR, VD_OFFERING, VD_ANSWER, VD_CONNECTED
 }

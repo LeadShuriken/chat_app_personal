@@ -219,6 +219,10 @@ button.accent {
     color: #43464b;
 }
 
+#messageForm .input-group {
+    display: flex;
+}
+
 #messageForm .input-group input {
     float: left;
     width: calc(100% - 85px);
@@ -318,4 +322,57 @@ button.accent {
 
 #copytextarea {
     min-width: 300px;
+}
+
+.container {
+    background: rgb(148, 144, 144);
+    margin: 50px auto;
+    max-width: 80%;
+    text-align: center;
+    padding: 2%;
+}
+
+.footer {
+    background: rgb(148, 144, 144);
+    text-align: center;
+    padding: 2%;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.video-container {
+    display: flex;
+    justify-content: center;
+}
+
+.video-block {
+    height: 200px;
+    width: 300px;
+}
+
+.web-rtc-page {
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.loader {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin: 0px auto 10px auto;
+    position: relative;
+    border: 10px solid rgba(255, 255, 255, 0.2);
+    border-top: 10px solid #ffffff;
+    animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
