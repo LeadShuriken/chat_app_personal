@@ -13,8 +13,9 @@ CLICKBAIT-FILTER-SERVICE uses a number of open source projects:
   * [SPRING] - JAVA SPRING FRAMEWORK
   * [SPRING-BOOT] - SPRING PROJ BOOTSTRAP
   * [H2] - SQL IN MEMORY DATABASE
-  * [JWT] - JSON WEB TOKEN
   * [LOMBOK] - JAVA SPLICING FRAMEWORK
+  * [WEBRTC] - WEB REALTIME COMMUNICATION API
+  * [STOMP] -  STREAMING TEXT MESSEAGING PROTOCOL
 
 ## Installation
 
@@ -50,5 +51,6 @@ This application is an **GRADLE APPLICATION USING THE GRADLE WRAPPER**;
   [SPRING-BOOT]: <https://spring.io/projects/spring-boot>
   [H2]: <http://www.h2database.com/html/main.html>
   [GRADLE]: <https://gradle.org>
-  [JWT]: <https://jwt.io>
   [LOMBOK]: <https://projectlombok.org>
+  [WEBRTC]: <https://en.wikipedia.org/wiki/WebRTC>
+  [STOMP]: <https://stomp.github.io>
