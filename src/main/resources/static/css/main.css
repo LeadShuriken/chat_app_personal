@@ -237,7 +237,7 @@ button.accent {
 
 .chat-header {
     text-align: center;
-    padding: 15px;
+    padding: 4px;
     border-bottom: 1px solid #ececec;
 }
 
@@ -341,31 +341,32 @@ button.accent {
     width: 100%;
 }
 
-.video-container {
-    display: flex;
-    justify-content: center;
-}
-
 .video-block {
     height: 200px;
     width: 300px;
 }
 
-.web-rtc-page {
+#web-rtc-page {
+    display: none;
     color: white;
     padding: 20px;
     text-align: center;
+    justify-content: center;
+    background-color: #43464b;
 }
 
 .loader {
-    width: 90px;
-    height: 90px;
+    height: 150px;
+    width: 150px;
     border-radius: 50%;
-    margin: 0px auto 10px auto;
-    position: relative;
+    margin: auto;
     border: 10px solid rgba(255, 255, 255, 0.2);
     border-top: 10px solid #ffffff;
     animation: spin 1s infinite linear;
+}
+
+#cancelButton {
+    display: none;
 }
 
 @keyframes spin {

@@ -22,11 +22,9 @@ import lombok.ToString;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Message {
 
-    @SQLInjectionSafe
     @JsonProperty("content")
     private String content;
 
-    @SQLInjectionSafe
     @JsonProperty("sender")
     private String sender;
 

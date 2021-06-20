@@ -68,6 +68,7 @@ function copyToClipboard(text) {
 function onConnected() {
     // Subscribe to the Public Topic
     stompClient.subscribe('/chat/' + chatname, onMessageReceived);
+    stompClient.subscribe('/user/queue', onRTCMessageReceived);
 
     // Tell your chatname to the server
     stompClient.send("/app/register/" + chatname,
@@ -103,9 +104,28 @@ function sendWS(event) {
     event.preventDefault();
 }
 
+function onRTCMessageReceived(payload) {
+    var message = JSON.parse(payload.body);
+    if (message.type === "VD_OFFERING") {
+        offerSignal = JSON.parse(message.content);
+        cancelButton.style.display = "block";
+        connectionStatus = 'VD_RECEIVING';
+        rtcButton.innerHTML = 'Answer';
+    } else if (message.type === "VD_ANSWER") {
+        rtcButton.innerHTML = 'Close';
+        cancelButton.style.display = "none";
+        simplePeer.signal(JSON.parse(message.content));
+    } else if (message.type === "VD_CANCEL") {
+        rtcButton.innerHTML = 'Call';
+        cancelButton.style.display = "none";
+        videoCaller.classList.remove("loader");
+        videoSelf.srcObject = null;
+        vidCon.style.display = 'none';
+    }
+}
+
 function onMessageReceived(payload) {
     var message = JSON.parse(payload.body);
-
     var messageElement = document.createElement('li');
 
     if (message.type === 'MS_JOIN') {

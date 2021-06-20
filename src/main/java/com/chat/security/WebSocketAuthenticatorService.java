@@ -36,7 +36,7 @@ public class WebSocketAuthenticatorService {
             final UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                     authentication.getName(), null, authentication.getAuthorities());
 
-            if (authentication.getPrincipal().equals("user")) {
+            if (((String) authentication.getPrincipal()).startsWith("user")) {
                 return authenticationToken;
             }
 

@@ -34,6 +34,8 @@
     </div>
 
     <div id="chat-page" class="hidden">
+
+
         <div class="navbar">
             <div>
                 <form th:action="@{/logout}" method="post">
@@ -47,12 +49,14 @@
         </div>
 
         <div class="chat-container">
-            <video id="video" controls width="250">
-                Sorry, your browser doesn't support embedded videos.
-            </video>
             <div class="chat-header">
-                <h2>Chat Box</h2>
+                <h3>Chat Box</h3>
             </div>
+            <div id="web-rtc-page">
+                <video id="videoSelf" playsinline autoplay muted class="video-block"></video>
+                <video id="videoCaller" playsinline autoplay class="video-block loader"> </video>
+            </div>
+
             <div class="connecting">Connecting...</div>
             <ul id="messageArea">
 
@@ -63,14 +67,15 @@
                         <input type="text" id="message" placeholder="Write Here..." autocomplete="off"
                             class="form-control" />
                         <button type="submit" class="primary">Send</button>
-                        <button type="button" class="accent" onclick='createOffer()'>Call</button>
+                        <button id='rtcButton' class="accent" onclick="webRTCaction()">Call</button>
+                        <button id='cancelButton' class="default" onclick="cancelRTC()">Cancel</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 
-    <script th:src="@{/webjars/sockjs-client/simple-peer/9.7.0/simplepeer.min.js}"></script>
+    <script th:src="@{/webjars/simple-peer/9.7.0/simplepeer.min.js}"></script>
     <script th:src="@{/webjars/sockjs-client/1.5.1/sockjs.min.js}"></script>
     <script th:src="@{/webjars/stomp-websocket/2.3.4/stomp.min.js}"></script>
     <script th:src="@{/js/webRTCClient.js}"></script>

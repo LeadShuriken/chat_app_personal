@@ -28,7 +28,7 @@ dependencies {
 	implementation group: 'org.springframework.security', name: 'spring-security-messaging', version: '5.5.0'	
 	implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.0.4.RELEASE'
 	implementation group: 'org.webjars.npm', name: 'simple-peer', version: '9.7.0'
-
+	
 	implementation group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.6'
 	implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.20'
 	implementation group: 'org.hibernate', name: 'hibernate-validator', version: '7.0.1.Final'
