@@ -83,7 +83,6 @@ public class MessageController {
         switch (chatMessage.getType()) {
             case VD_OFFERING:
             case VD_ANSWER:
-            case VD_CONNECTED:
             case VD_CANCEL:
                 Optional<String> user = Optional.ofNullable(headers.getUser()).map(Principal::getName);
                 if (user.isPresent()) {
