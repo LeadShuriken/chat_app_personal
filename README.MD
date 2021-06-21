@@ -2,7 +2,7 @@
 
 ## Description
 
-Personal Message and Video Chat App
+Personal Messaging and Video Chat App. Text messeging with STOMP websockets. Video Calling with WebRTC. Limited Sessions and "no footprint" user data handling.
 
 ## Technologies
 
@@ -16,6 +16,7 @@ CHAT-APP-PERSONAL uses a number of open source projects:
   * [LOMBOK] - JAVA SPLICING FRAMEWORK
   * [WEBRTC] - WEB REALTIME COMMUNICATION API
   * [STOMP] -  STREAMING TEXT MESSEAGING PROTOCOL
+  * [THYMELEAF] - SERVER SIDE JAVA TEMPLATION ENGINE
 
 ## Installation
 
@@ -41,10 +42,9 @@ This application is an **GRADLE APPLICATION USING THE GRADLE WRAPPER**;
   $ ./gradlew build
   ```
 
-### Todos
+  ## Todo
 
- - Tests and Docs
- - All stored procedures
+   - Volume and mic handling on open audio channel
 
   [JAVA11]: <https://www.oracle.com/java/technologies/javase-jdk11-downloads.html>
   [SPRING]: <https://spring.io>
@@ -54,3 +54,4 @@ This application is an **GRADLE APPLICATION USING THE GRADLE WRAPPER**;
   [LOMBOK]: <https://projectlombok.org>
   [WEBRTC]: <https://en.wikipedia.org/wiki/WebRTC>
   [STOMP]: <https://stomp.github.io>
+  [THYMELEAF]: <https://www.thymeleaf.org>
