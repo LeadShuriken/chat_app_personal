@@ -6,7 +6,7 @@ Personal Message and Video Chat App
 
 ## Technologies
 
-CLICKBAIT-FILTER-SERVICE uses a number of open source projects:
+CHAT-APP-PERSONAL uses a number of open source projects:
 
   * [JAVA11] - JAVA 11 SDK
   * [GRADLE] - BUILD AUTOMATION TOOL
